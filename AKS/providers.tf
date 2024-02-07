@@ -19,14 +19,21 @@ terraform {
       version = "0.9.1"
     }
   }
-  backend "remote" {
-		hostname = "app.terraform.io"
-		organization = "CloudQuickLabs"
+  # backend "remote" {
+	# 	hostname = "app.terraform.io"
+	# 	organization = "CloudQuickLabs"
 
-		workspaces {
-			name = "AzureAKSLabs"
-		}
-	}
+	# 	workspaces {
+	# 		name = "AzureAKSLabs"
+	# 	}
+	# }
+
+   backend "azurerm" {
+    resource_group_name  = "terraformstate"
+    storage_account_name = "tfstatesbackend365"
+    container_name       = "tfbackend"
+    key                  = "aks_lab.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
